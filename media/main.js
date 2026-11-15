@@ -1,0 +1,1 @@
+document.getElementById("yellow").style.color = "yellow";

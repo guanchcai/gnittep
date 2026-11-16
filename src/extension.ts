@@ -9,6 +9,11 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.window.registerWebviewViewProvider("gnittep.petsView", new PetWebviewer(context.extensionUri))
 	);
+	context.subscriptions.push(
+		vscode.commands.registerCommand('gnittep.addPet', () => {
+			vscode.window.showInformationMessage('Add pet clicked');
+		})
+	);
 }
 
 // This method is called when your extension is deactivated
@@ -32,7 +37,8 @@ class PetWebviewer implements vscode.WebviewViewProvider {
 		);
 		const html = fs.readFileSync(this.htmlPath.fsPath, 'utf8')
 					   .replaceAll('{{cssUri}}', cssUri.toString())
-					   .replaceAll('{{jsUri}}', jsUri.toString());
+					   .replaceAll('{{jsUri}}', jsUri.toString())
+					   .replaceAll('{{mediaUri}}', webviewView.webview.asWebviewUri(this.mediaPath).toString());
 
 		webviewView.webview.options = { 
 			enableScripts: true,

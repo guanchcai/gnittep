@@ -13,14 +13,29 @@
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
-      
+      {
+        "command": "gnittep.addPet",
+        "title": "Add Pet",
+        "category": "Gnittep",
+        "icon": "$(add)"
+      }
     ], 
     "views": {
       "explorer": [
         { 
           "type": "webview", 
           "id": "gnittep.petsView", 
-          "name": "Gnittep" 
+          "name": "Gnittep",
+          "icon": ""
+        }
+      ]
+    }, 
+    "menus": {
+      "view/title": [
+        {
+          "command": "gnittep.addPet",
+          "when": "view == gnittep.petsView",
+          "group": "navigation"
         }
       ]
     }
